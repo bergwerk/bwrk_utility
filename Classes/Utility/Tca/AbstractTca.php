@@ -291,16 +291,19 @@ class AbstractTca
 		return $this->addTypoLink($fieldName, $label, $exclude, $size, $max, $readOnly, $eval, $displayCond, 'file');
 	}
 
+
 	/**
 	 * @param string $fieldName
-	 * @param bool|false $rte
+	 * @param bool $rte
 	 * @param string $label
 	 * @param int $exclude
 	 * @param int $cols
 	 * @param int $rows
+	 * @param null $displayCond
+	 * @param int $readOnly
 	 * @return array
 	 */
-	public function addTextField($fieldName, $rte = false, $label = '', $exclude = 0, $cols = 40, $rows = 6, $displayCond = null)
+	public function addTextField($fieldName, $rte = false, $label = '', $exclude = 0, $cols = 40, $rows = 6, $displayCond = null, $readOnly = 0)
 	{
 		if (empty($label)) {
 			$label = $this->getFieldLabel($fieldName);
@@ -312,7 +315,8 @@ class AbstractTca
 			'config' => array(
 				'type' => 'text',
 				'cols' => $cols,
-				'rows' => $rows
+				'rows' => $rows,
+				'readOnly' => $readOnly
 			)
 		);
 
