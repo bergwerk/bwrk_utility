@@ -2,8 +2,22 @@
 
 namespace BERGWERK\BwrkUtility\Utility\Tca;
 
+use BERGWERK\BwrkUtility\Utility\Tca\Configuration\Ctrl;
+
 class Configuration
 {
+
+    /**
+     * @var \BERGWERK\BwrkUtility\Utility\Tca\Configuration\Ctrl
+     */
+    public $ctrl;
+
+    function __construct()
+    {
+        $this->ctrl = new Ctrl();
+    }
+
+
     /**
      * @var string
      */

@@ -13,6 +13,10 @@ class Tca extends AbstractTca
     public function init(Configuration $configuration)
     {
         $this->conf = $configuration;
+
+
+
+
         $ll = $this->conf->getLl();
         $iconFile = $this->conf->getIconFile();
         $enableColumns = $this->conf->getEnableColumns();
@@ -44,25 +48,61 @@ class Tca extends AbstractTca
 
         $tca = array(
             'ctrl' => array(
-                'hideTable' => $this->conf->isHideTable(),
-                'title' => $this->conf->getLl(),
-                'label' => $this->conf->getLabelField(),
-                'tstamp' => 'tstamp',
-                'crdate' => 'crdate',
-                'cruser_id' => 'cruser_id',
-                'dividers2tabs' => TRUE,
-                'sortby' => 'sorting',
-                'versioningWS' => 2,
-                'versioning_followPages' => TRUE,
-                'origUid' => 't3_origuid',
-                'languageField' => 'sys_language_uid',
-                'transOrigPointerField' => 'l10n_parent',
-                'transOrigDiffSourceField' => 'l10n_diffsource',
-                'delete' => 'deleted',
-                'enablecolumns' => $this->conf->getEnableColumns(),
-                'iconfile' => $this->conf->getIconFile(),
-                'searchFields' => $this->getSearchFields(),
-                'requestUpdate' => implode(',', $this->conf->getRequestUpdateColumns())
+                'title' => $this->conf->ctrl->getTitle(),
+                'label' => $this->conf->ctrl->getLabel(),
+                'label_alt' => $this->conf->ctrl->getLabelAlt(),
+                'label_alt_force' => $this->conf->ctrl->isLabelAltForce(),
+                'label_userFunc' => $this->conf->ctrl->getLabelUserFunc(),
+                'label_userFunc_options' => $this->conf->ctrl->getLabelUserFuncOptions(),
+                'formattedLabel_userFunc' => $this->conf->ctrl->getFormattedLabelUserFunc(),
+                'formattedLabel_userFunc_options' => $this->conf->ctrl->getFormattedLabelUserFuncOptions(),
+                'type' => $this->conf->ctrl->getType(),
+                'hideTable' => $this->conf->ctrl->isHideTable(),
+                'requestUpdate' => $this->conf->ctrl->getRequestUpdate(),
+                'iconfile' => $this->conf->ctrl->getIconFile(),
+                'typeicon_column' => $this->conf->ctrl->getTypeIconColumn(),
+                'typeicon_classes' => $this->conf->ctrl->getTypeIconClasses(),
+                'thumbnail' => $this->conf->ctrl->getThumbnail(),
+                'selicon_field' => $this->conf->ctrl->getSelIconField(),
+                'selicon_field_path' => $this->conf->ctrl->getSelIconFieldPath(),
+                'sortby' => $this->conf->ctrl->getSortBy(),
+                'default_sortby' => $this->conf->ctrl->getSortByDefault(),
+                'mainpalette' => $this->conf->ctrl->getMainPalette(),
+                'tstamp' => $this->conf->ctrl->getTstamp(),
+                'crdate' => $this->conf->ctrl->getCrdate(),
+                'cruser_id' => $this->conf->ctrl->getCruserId(),
+                'rootLevel' => $this->conf->ctrl->getRootLevel(),
+                'readOnly' => $this->conf->ctrl->isReadOnly(),
+                'adminOnly' => $this->conf->ctrl->isAdminOnly(),
+                'editlock' => $this->conf->ctrl->getEditLock(),
+                'origUid' => $this->conf->ctrl->getOrigUid(),
+                'delete' => $this->conf->ctrl->getDelete(),
+                'descriptionColumn' => $this->conf->ctrl->getDescriptionColumn(),
+                'enablecolumns' => $this->conf->ctrl->getEnableColumns(),
+                'searchFields' => $this->conf->ctrl->getSearchFields(),
+                'groupName' => $this->conf->ctrl->getGroupName(),
+                'hideAtCopy' => $this->conf->ctrl->isHideAtCopy(),
+                'prependAtCopy' => $this->conf->ctrl->getPrependAtCopy(),
+                'copyAfterDuplFields' => $this->conf->ctrl->getCopyAfterDuplFields(),
+                'setToDefaultOnCopy' => $this->conf->ctrl->getSetToDefaultOnCopy(),
+                'useColumnsForDefaultValues' => $this->conf->ctrl->getUseColumnsForDefaultValues(),
+                'shadowColumnsForNewPlaceholders' => $this->conf->ctrl->getShadowColumnsForNewPlaceholders(),
+                'shadowColumnsForMovePlaceholders' => $this->conf->ctrl->getShadowColumnsForMovePlaceholders(),
+                'is_static' => $this->conf->ctrl->isIsStatic(),
+                'fe_cruser_id' => $this->conf->ctrl->getFeCrUserId(),
+                'fe_crgroup_id' => $this->conf->ctrl->getFeCrGroupId(),
+                'fe_admin_lock' => $this->conf->ctrl->getFeAdminLock(),
+                'languageField' => $this->conf->ctrl->getLanguageField(),
+                'transOrigPointerField' => $this->conf->ctrl->getTransOrigPointerField(),
+                'transForeignTable' => $this->conf->ctrl->getTransForeignTable(),
+                'transOrigPointerTable' => $this->conf->ctrl->getTransOrigPointerTable(),
+                'transOrigDiffSourceField' => $this->conf->ctrl->getTransOrigDiffSourceField(),
+                'versioningWS' => $this->conf->ctrl->getVersioningWS(),
+                'versioningWS_alwaysAllowLiveEdit' => $this->conf->ctrl->isVersioningWSAlwaysAllowLiveEdit(),
+                'versioning_followPages' => $this->conf->ctrl->isVersioningFollowPages(),
+                'security' => $this->conf->ctrl->getSecurity(),
+                'EXT' => $this->conf->ctrl->getExt()
+//                'dividers2tabs' => TRUE,
             ),
             'interface' => array(
                 'showRecordFieldList' => $this->getRecordsFieldList(),
