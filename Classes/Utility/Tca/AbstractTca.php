@@ -31,7 +31,7 @@ class AbstractTca
 	 */
 	public function getSearchFields()
 	{
-		return implode(',', $this->conf->getSearchFields());
+		return implode(',', $this->conf->ctrl->getSearchFields());
 	}
 
 	/**

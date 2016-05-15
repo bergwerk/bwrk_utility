@@ -13,11 +13,16 @@ class Tca extends AbstractTca
      */
     public function init(Configuration $configuration)
     {
+        $this->setDefaults($configuration);
+    }
+
+    /**
+     * @param Configuration $configuration
+     */
+    private function setDefaults(Configuration $configuration)
+    {
         $this->conf = $configuration;
         $this->conf->interface->setShowRecordFieldList($this->getRecordsFieldList());
-
-
-
 
         $ll = $this->conf->getLl();
         $iconFile = $this->conf->ctrl->getIconFile();
@@ -28,11 +33,11 @@ class Tca extends AbstractTca
         }
 
         if (empty($iconFile)) {
-            $this->iconFile = ExtensionManagementUtility::extRelPath($this->conf->getExt()) . 'Resources/Public/Icons/' . $this->conf->getModel() . '.gif';
+            $this->conf->ctrl->setIconFile(ExtensionManagementUtility::extRelPath($this->conf->getExt()) . 'Resources/Public/Icons/' . $this->conf->getModel() . '.gif');
         }
 
         if (count($enableColumns) == 0) {
-            $this->conf->setEnableColumns(array(
+            $this->conf->ctrl->setEnableColumns(array(
                 'disabled' => 'hidden',
                 'starttime' => 'starttime',
                 'endtime' => 'endtime',
@@ -50,7 +55,7 @@ class Tca extends AbstractTca
 
         $tca = array(
             'ctrl' => array(
-                'title' => $this->conf->ctrl->getTitle(),
+                'title' => $this->getFieldLabel($this->conf->ctrl->getTitle()),
                 'label' => $this->conf->ctrl->getLabel(),
                 'label_alt' => $this->conf->ctrl->getLabelAlt(),
                 'label_alt_force' => $this->conf->ctrl->isLabelAltForce(),
