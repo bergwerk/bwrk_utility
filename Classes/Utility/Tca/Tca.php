@@ -13,6 +13,7 @@ class Tca extends AbstractTca
     public function init(Configuration $configuration)
     {
         $this->conf = $configuration;
+        $this->conf->interface->setShowRecordFieldList($this->getRecordsFieldList());
 
 
 
@@ -103,7 +104,9 @@ class Tca extends AbstractTca
 //                'dividers2tabs' => TRUE,
             ),
             'interface' => array(
-                'showRecordFieldList' => $this->getRecordsFieldList(),
+                'showRecordFieldList' => $this->conf->interface->getShowRecordFieldList(),
+                'maxDBListItems' => $this->conf->interface->getMaxDBListItems(),
+                'maxSingleDBListItems' => $this->conf->interface->getMaxSingleDBListItems()
             ),
             'columns' => $this->getColumns(),
             'types' => array(

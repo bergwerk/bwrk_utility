@@ -119,7 +119,7 @@ class AbstractTca
 	 */
 	public function getRecordsFieldList()
 	{
-		return implode(',', array_keys($this->removeTabs($this->fields)));
+		return implode(',', array_keys($this->getColumns()));
 	}
 
 	/**
@@ -156,7 +156,7 @@ class AbstractTca
 	 */
 	public function addConfigSearchField($string)
 	{
-		array_push($this->conf->getSearchFields(), $string);
+		array_push($this->conf->ctrl->getSearchFields(), $string);
 	}
 
 

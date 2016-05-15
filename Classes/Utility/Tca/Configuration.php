@@ -2,19 +2,26 @@
 
 namespace BERGWERK\BwrkUtility\Utility\Tca;
 
-use BERGWERK\BwrkUtility\Utility\Tca\Configuration\Ctrl;
+use BERGWERK\BwrkUtility\Utility\Tca\Configuration\CtrlClass;
+use BERGWERK\BwrkUtility\Utility\Tca\Configuration\InterfaceClass;
 
 class Configuration
 {
 
     /**
-     * @var \BERGWERK\BwrkUtility\Utility\Tca\Configuration\Ctrl
+     * @var \BERGWERK\BwrkUtility\Utility\Tca\Configuration\CtrlClass
      */
     public $ctrl;
 
+    /**
+     * @var \BERGWERK\BwrkUtility\Utility\Tca\Configuration\InterfaceClass
+     */
+    public $interface;
+
     function __construct()
     {
-        $this->ctrl = new Ctrl();
+        $this->ctrl = new CtrlClass();
+        $this->interface = new InterfaceClass();
     }
 
     /**

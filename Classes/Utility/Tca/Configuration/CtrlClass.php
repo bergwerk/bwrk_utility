@@ -2,349 +2,238 @@
 
 namespace BERGWERK\BwrkUtility\Utility\Tca\Configuration;
 
-class Ctrl
+class CtrlClass
 {
     /**
-     * Contains the system name of the table. Is used for display in the backend.
-     *
      * @var string
      */
     protected $title = '';
     /**
-     * Points to the field name of the table which should be used as the “title” when the record is displayed in the system.
-     *
      * @var string
      */
     protected $label = '';
     /**
-     * Comma-separated list of field names, which are holding alternative values to the value from the field pointed to by “label” (see above) if that value is empty. May not be used consistently in the system, but should apply in most cases.
-     *
      * @var string
      */
     protected $labelAlt = '';
     /**
-     * If set, then the label_alt fields are always shown in the title separated by comma.
-     *
      * @var bool
      */
     protected $labelAltForce = false;
     /**
-     * Function or method reference.
-     *
      * @var string
      */
     protected $labelUserFunc = '';
     /**
-     * Options for label_userFunc.
-     *
      * @var array
      */
     protected $labelUserFuncOptions = array();
     /**
-     * Similar to label_userFunc but allowed to return formatted HTML for the label and used only for the labels of inline (IRRE) records.
-     *
      * @var string
      */
     protected $formattedLabelUserFunc = '';
     /**
-     * Options for formattedLabel_userFunc.
-     *
      * @var array
      */
     protected $formattedLabelUserFuncOptions = array();
     /**
-     * Field name, which defines the "record type".
-     *
      * @var string
      */
     protected $type = '';
     /**
-     * Hide this table in record listings.
-     *
      * @var bool
      */
     protected $hideTable = false;
     /**
-     * This is a list of fields that will trigger an update of the form, on top of the “type” field.
-     *
      * @var string
      *
      * @todo: implode(',', $this->conf->getRequestUpdateColumns())
      */
     protected $requestUpdate = '';
     /**
-     * Pointing to the icon file to use for the table.
-     *
      * @var string
      */
     protected $iconFile = '';
     /**
-     * Field name, whose value decides alternative icons for the table records (The default icon is the one defined with the ‘iconfile’ value.)
-     *
      * @var string
      */
     protected $typeIconColumn = '';
     /**
-     * Array of class names to use for the records. The keys must correspond to the values found in the column referenced in the typeicon_column property. The class names correspond to the backend’s sprite icons.
-     *
      * @var array
      */
     protected $typeIconClasses = array();
     /**
-     * Field name, which contains the value for any thumbnails of the records.
-     *
      * @var string
      */
     protected $thumbnail = '';
     /**
-     * Field name, which contains the thumbnail image used to represent the record visually whenever it is shown in TCEforms as a foreign reference selectable from a selector box.
-     *
      * @var string
      */
     protected $selIconField = 'icon';
     /**
-     * The path prefix of the value from selicon_field. This must the same as the “upload_path” of that field.
-     *
      * @var string
      */
     protected $selIconFieldPath = 'uploads/media';
     /**
-     * Field name, which is used to manage the order of the records.
-     *
      * @var string
      */
     protected $sortBy = 'sorting';
     /**
-     * If a field name for sortby is defined, then this is ignored.
-     *
      * @var string
      */
     protected $sortByDefault = 'ORDER BY sorting';
     /**
-     * Points to the palette-number(s) that should always be shown in the bottom of the TCEform.
-     *
      * @var string
      */
     protected $mainPalette = '1';
     /**
-     * Field name, which is automatically updated to the current timestamp (UNIX-time in seconds) each time the record is updated/saved in the system.
-     *
      * @var string
      */
     protected $tstamp = 'tstamp';
     /**
-     * Field name, which is automatically set to the current timestamp when the record is created. Is never modified again.
-     *
      * @var string
      */
     protected $crdate = 'crdate';
     /**
-     * Field name, which is automatically set to the uid of the backend user (be_users) who originally created the record. Is never modified again.
-     *
      * @var string
      */
     protected $cruserId = 'cruser_id';
     /**
-     * Determines where a record may exist in the page tree.
-     *
      * @var int
      */
     protected $rootLevel = 0;
     /**
-     * Records from this table may not be edited in the TYPO3 backend. Such tables are usually called “static”.
-     *
      * @var bool
      */
     protected $readOnly = false;
     /**
-     * Records may be changed only by “admin”-users (having the “admin” flag set).
-     *
      * @var bool
      */
     protected $adminOnly = false;
     /**
-     * Field name, which – if set – will prevent all editing of the record for non-admin users.
-     *
      * @var string
      */
     protected $editLock = '';
     /**
-     * Field name, which will contain the UID of the original record in case a record is created as a copy or new version of another record.
-     *
      * @var string
      */
     protected $origUid = 't3_origuid';
     /**
-     * Field name, which indicates if a record is considered deleted or not.
-     *
      * @var string
      */
     protected $delete = 'deleted';
     /**
-     * Field name where description of a record is stored in.
-     *
      * @var string
      */
     protected $descriptionColumn = '';
     /**
-     * Specifies which publishing control features are automatically implemented for the table.
-     *
      * @var array
      */
     protected $enableColumns = array();
     /**
-     * Comma-separated list of fields from the table that will be included when searching for records in the TYPO3 backend. Starting with TYPO3 CMS 4.6, no record from a table will ever be found if that table does not have “searchFields” defined.
-     *
      * @var array
      */
     protected $searchFields = array();
     /**
-     * This option can be used to group records in the new record wizard.
-     *
      * @var string
      */
     protected $groupName = '';
     /**
-     * If set, and the “disabled” field from enablecolumns is specified, then records will be disabled/hidden when they are copied.
-     *
      * @var bool
      */
     protected $hideAtCopy = true;
     /**
-     * This string will be prepended the records title field when the record is inserted on the same PID as the original record (thus you can distinguish them).
-     *
      * @var string
      */
     protected $prependAtCopy = ' (copy %s)';
     /**
-     * The fields in this list will automatically have the value of the same field from the “previous” record transferred when they are copied or moved to the position after another record from same table.
-     *
      * @var string
      */
     protected $copyAfterDuplFields = 'colPos, sys_language_uid';
     /**
-     * These fields are restored to the default value of the record when they are copied.
-     *
      * @var string
      */
     protected $setToDefaultOnCopy = '';
     /**
-     * When a new record is created, this defines the fields from the ‘previous’ record that should be used as default values.
-     *
      * @var string
      */
     protected $useColumnsForDefaultValues = '';
     /**
-     * When a new element is created in a draft workspace a placeholder element is created in the Live workspace.
-     *
      * @var string
      */
     protected $shadowColumnsForNewPlaceholders = '';
     /**
-     * Similar to shadowColumnsForNewPlaceholders but for move placeholders.
-     *
      * @var string
      */
     protected $shadowColumnsForMovePlaceholders = '';
     /**
-     * This marks a table to be “static”.
-     *
      * @var bool
      */
     protected $isStatic = false;
     /**
-     * Field name which is used to store the uid of a frontend user if the record is created through fe_adminLib.
-     *
      * @var string
      */
     protected $feCrUserId = '';
     /**
-     * Field name which is used for storing the uid of a frontend group whose members are allowed to edit through fe_adminLib.
-     *
      * @var string
      */
     protected $feCrGroupId = '';
     /**
-     * Field name which points to the field name which - as a boolean - will prevent any editing by the fe_adminLib if set.
-     *
      * @var string
      */
     protected $feAdminLock = '';
     /**
-     * Localization access control.
-     *
      * @var string
      */
     protected $languageField = 'sys_language_uid';
     /**
-     * Name of the field used by translations to point back to the original record (i.e. the record in the default language of which they are a translation).
-     *
      * @var string
      */
     protected $transOrigPointerField = 'l10n_parent';
     /**
-     * Translations may be stored in a separate table, instead of the same one.
-     *
      * @var string
      */
     protected $transForeignTable = '';
     /**
-     * Symmetrical property to “transForeignTable”. See above for explanations.
-     *
      * @var string
      */
     protected $transOrigPointerTable = '';
     /**
-     * Field name which will be updated with the value of the original language record whenever the translation record is updated.
-     *
      * @var string
      */
     protected $transOrigDiffSourceField = 'l10n_diffsource';
     /**
-     * If set, versioning is enabled for this table. If integer it indicates a version number of versioning features.
-     *
      * @var int
      */
     protected $versioningWS = 2;
     /**
-     * If set, this table can always be edited live even in a workspace and even if “live editing” is not enabled in a custom workspace.
-     *
      * @var bool
      */
     protected $versioningWSAlwaysAllowLiveEdit = true;
     /**
-     * (Only for other tables than “pages”)
-     * If set, content from this table will get copied along when a new version of a page is created.
-     *
      * @var bool
      */
     protected $versioningFollowPages = true;
     /**
-     * Array of sub-properties, see Security-related configuration.
-     *
      * @var array
      */
     protected $security = array();
     /**
-     * Allows users to access records that are not in their defined web-mount, thus bypassing this restriction.
-     *
      * @var bool
      */
     protected $security_ignoreWebMountRestriction = true;
     /**
-     * Allows non-admin users to access records that on the root-level (page-id 0), thus bypassing this usual restriction.
-     *
      * @var bool
      */
     protected $security_ignoreRootLevelRestriction = true;
     /**
-     * User-defined content for extensions. You can use this as you like.
-     *
      * @var array
      */
     protected $ext = array();
 
     /**
+     * Contains the system name of the table. Is used for display in the backend.
+     *
      * @return string
      */
     public function getTitle()
@@ -353,6 +242,8 @@ class Ctrl
     }
 
     /**
+     * Contains the system name of the table. Is used for display in the backend.
+     *
      * @param string $title
      */
     public function setTitle($title)
@@ -361,6 +252,8 @@ class Ctrl
     }
 
     /**
+     * Points to the field name of the table which should be used as the “title” when the record is displayed in the system.
+     *
      * @return string
      */
     public function getLabel()
@@ -369,6 +262,8 @@ class Ctrl
     }
 
     /**
+     * Points to the field name of the table which should be used as the “title” when the record is displayed in the system.
+     *
      * @param string $label
      */
     public function setLabel($label)
@@ -377,6 +272,8 @@ class Ctrl
     }
 
     /**
+     * Comma-separated list of field names, which are holding alternative values to the value from the field pointed to by “label” (see above) if that value is empty. May not be used consistently in the system, but should apply in most cases.
+     *
      * @return string
      */
     public function getLabelAlt()
@@ -385,6 +282,8 @@ class Ctrl
     }
 
     /**
+     * Comma-separated list of field names, which are holding alternative values to the value from the field pointed to by “label” (see above) if that value is empty. May not be used consistently in the system, but should apply in most cases.
+     *
      * @param string $labelAlt
      */
     public function setLabelAlt($labelAlt)
@@ -393,6 +292,8 @@ class Ctrl
     }
 
     /**
+     * If set, then the label_alt fields are always shown in the title separated by comma.
+     *
      * @return boolean
      */
     public function isLabelAltForce()
@@ -401,6 +302,8 @@ class Ctrl
     }
 
     /**
+     * If set, then the label_alt fields are always shown in the title separated by comma.
+     *
      * @param boolean $labelAltForce
      */
     public function setLabelAltForce($labelAltForce)
@@ -409,6 +312,8 @@ class Ctrl
     }
 
     /**
+     * Function or method reference.
+     *
      * @return string
      */
     public function getLabelUserFunc()
@@ -417,6 +322,8 @@ class Ctrl
     }
 
     /**
+     * Function or method reference.
+     *
      * @param string $labelUserFunc
      */
     public function setLabelUserFunc($labelUserFunc)
@@ -425,6 +332,8 @@ class Ctrl
     }
 
     /**
+     * Options for label_userFunc.
+     *
      * @return array
      */
     public function getLabelUserFuncOptions()
@@ -433,6 +342,8 @@ class Ctrl
     }
 
     /**
+     * Options for label_userFunc.
+     *
      * @param array $labelUserFuncOptions
      */
     public function setLabelUserFuncOptions($labelUserFuncOptions)
@@ -441,6 +352,8 @@ class Ctrl
     }
 
     /**
+     * Similar to label_userFunc but allowed to return formatted HTML for the label and used only for the labels of inline (IRRE) records.
+     *
      * @return string
      */
     public function getFormattedLabelUserFunc()
@@ -449,6 +362,8 @@ class Ctrl
     }
 
     /**
+     * Similar to label_userFunc but allowed to return formatted HTML for the label and used only for the labels of inline (IRRE) records.
+     *
      * @param string $formattedLabelUserFunc
      */
     public function setFormattedLabelUserFunc($formattedLabelUserFunc)
@@ -457,6 +372,8 @@ class Ctrl
     }
 
     /**
+     * Options for formattedLabel_userFunc.
+     *
      * @return array
      */
     public function getFormattedLabelUserFuncOptions()
@@ -465,6 +382,8 @@ class Ctrl
     }
 
     /**
+     * Options for formattedLabel_userFunc.
+     *
      * @param array $formattedLabelUserFuncOptions
      */
     public function setFormattedLabelUserFuncOptions($formattedLabelUserFuncOptions)
@@ -473,6 +392,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which defines the "record type".
+     *
      * @return string
      */
     public function getType()
@@ -481,6 +402,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which defines the "record type".
+     *
      * @param string $type
      */
     public function setType($type)
@@ -489,6 +412,8 @@ class Ctrl
     }
 
     /**
+     * Hide this table in record listings.
+     *
      * @return boolean
      */
     public function isHideTable()
@@ -497,6 +422,8 @@ class Ctrl
     }
 
     /**
+     * Hide this table in record listings.
+     *
      * @param boolean $hideTable
      */
     public function setHideTable($hideTable)
@@ -505,6 +432,8 @@ class Ctrl
     }
 
     /**
+     * This is a list of fields that will trigger an update of the form, on top of the “type” field.
+     *
      * @return string
      */
     public function getRequestUpdate()
@@ -513,6 +442,8 @@ class Ctrl
     }
 
     /**
+     * This is a list of fields that will trigger an update of the form, on top of the “type” field.
+     *
      * @param string $requestUpdate
      */
     public function setRequestUpdate($requestUpdate)
@@ -521,6 +452,8 @@ class Ctrl
     }
 
     /**
+     * Pointing to the icon file to use for the table.
+     *
      * @return string
      */
     public function getIconFile()
@@ -529,6 +462,8 @@ class Ctrl
     }
 
     /**
+     * Pointing to the icon file to use for the table.
+     *
      * @param string $iconFile
      */
     public function setIconFile($iconFile)
@@ -537,6 +472,8 @@ class Ctrl
     }
 
     /**
+     * Field name, whose value decides alternative icons for the table records (The default icon is the one defined with the ‘iconfile’ value.)
+     *
      * @return string
      */
     public function getTypeIconColumn()
@@ -545,6 +482,8 @@ class Ctrl
     }
 
     /**
+     * Field name, whose value decides alternative icons for the table records (The default icon is the one defined with the ‘iconfile’ value.)
+     *
      * @param string $typeIconColumn
      */
     public function setTypeIconColumn($typeIconColumn)
@@ -553,6 +492,8 @@ class Ctrl
     }
 
     /**
+     * Array of class names to use for the records. The keys must correspond to the values found in the column referenced in the typeicon_column property. The class names correspond to the backend’s sprite icons.
+     *
      * @return array
      */
     public function getTypeIconClasses()
@@ -561,6 +502,8 @@ class Ctrl
     }
 
     /**
+     * Array of class names to use for the records. The keys must correspond to the values found in the column referenced in the typeicon_column property. The class names correspond to the backend’s sprite icons.
+     *
      * @param array $typeIconClasses
      */
     public function setTypeIconClasses($typeIconClasses)
@@ -569,6 +512,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which contains the value for any thumbnails of the records.
+     *
      * @return string
      */
     public function getThumbnail()
@@ -577,6 +522,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which contains the value for any thumbnails of the records.
+     *
      * @param string $thumbnail
      */
     public function setThumbnail($thumbnail)
@@ -585,6 +532,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which contains the thumbnail image used to represent the record visually whenever it is shown in TCEforms as a foreign reference selectable from a selector box.
+     *
      * @return string
      */
     public function getSelIconField()
@@ -593,6 +542,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which contains the thumbnail image used to represent the record visually whenever it is shown in TCEforms as a foreign reference selectable from a selector box.
+     *
      * @param string $selIconField
      */
     public function setSelIconField($selIconField)
@@ -601,6 +552,8 @@ class Ctrl
     }
 
     /**
+     * The path prefix of the value from selicon_field. This must the same as the “upload_path” of that field.
+     *
      * @return string
      */
     public function getSelIconFieldPath()
@@ -609,6 +562,8 @@ class Ctrl
     }
 
     /**
+     * The path prefix of the value from selicon_field. This must the same as the “upload_path” of that field.
+     *
      * @param string $selIconFieldPath
      */
     public function setSelIconFieldPath($selIconFieldPath)
@@ -617,6 +572,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which is used to manage the order of the records.
+     *
      * @return string
      */
     public function getSortBy()
@@ -625,6 +582,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which is used to manage the order of the records.
+     *
      * @param string $sortBy
      */
     public function setSortBy($sortBy)
@@ -633,6 +592,8 @@ class Ctrl
     }
 
     /**
+     * If a field name for sortby is defined, then this is ignored.
+     *
      * @return string
      */
     public function getSortByDefault()
@@ -641,6 +602,8 @@ class Ctrl
     }
 
     /**
+     * If a field name for sortby is defined, then this is ignored.
+     *
      * @param string $sortByDefault
      */
     public function setSortByDefault($sortByDefault)
@@ -649,6 +612,8 @@ class Ctrl
     }
 
     /**
+     * Points to the palette-number(s) that should always be shown in the bottom of the TCEform.
+     *
      * @return string
      */
     public function getMainPalette()
@@ -657,6 +622,8 @@ class Ctrl
     }
 
     /**
+     * Points to the palette-number(s) that should always be shown in the bottom of the TCEform.
+     *
      * @param string $mainPalette
      */
     public function setMainPalette($mainPalette)
@@ -665,6 +632,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which is automatically updated to the current timestamp (UNIX-time in seconds) each time the record is updated/saved in the system.
+     *
      * @return string
      */
     public function getTstamp()
@@ -673,6 +642,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which is automatically updated to the current timestamp (UNIX-time in seconds) each time the record is updated/saved in the system.
+     *
      * @param string $tstamp
      */
     public function setTstamp($tstamp)
@@ -681,6 +652,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which is automatically set to the current timestamp when the record is created. Is never modified again.
+     *
      * @return string
      */
     public function getCrdate()
@@ -689,6 +662,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which is automatically set to the current timestamp when the record is created. Is never modified again.
+     *
      * @param string $crdate
      */
     public function setCrdate($crdate)
@@ -697,6 +672,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which is automatically set to the uid of the backend user (be_users) who originally created the record. Is never modified again.
+     *
      * @return string
      */
     public function getCruserId()
@@ -705,6 +682,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which is automatically set to the uid of the backend user (be_users) who originally created the record. Is never modified again.
+     *
      * @param string $cruserId
      */
     public function setCruserId($cruserId)
@@ -713,6 +692,8 @@ class Ctrl
     }
 
     /**
+     * Determines where a record may exist in the page tree.
+     *
      * @return int
      */
     public function getRootLevel()
@@ -721,6 +702,8 @@ class Ctrl
     }
 
     /**
+     * Determines where a record may exist in the page tree.
+     *
      * @param int $rootLevel
      */
     public function setRootLevel($rootLevel)
@@ -729,6 +712,8 @@ class Ctrl
     }
 
     /**
+     * Records from this table may not be edited in the TYPO3 backend. Such tables are usually called “static”.
+     *
      * @return boolean
      */
     public function isReadOnly()
@@ -737,6 +722,8 @@ class Ctrl
     }
 
     /**
+     * Records from this table may not be edited in the TYPO3 backend. Such tables are usually called “static”.
+     *
      * @param boolean $readOnly
      */
     public function setReadOnly($readOnly)
@@ -745,6 +732,8 @@ class Ctrl
     }
 
     /**
+     * Records may be changed only by “admin”-users (having the “admin” flag set).
+     *
      * @return boolean
      */
     public function isAdminOnly()
@@ -753,6 +742,8 @@ class Ctrl
     }
 
     /**
+     * Records may be changed only by “admin”-users (having the “admin” flag set).
+     *
      * @param boolean $adminOnly
      */
     public function setAdminOnly($adminOnly)
@@ -761,6 +752,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which – if set – will prevent all editing of the record for non-admin users.
+     *
      * @return string
      */
     public function getEditLock()
@@ -769,6 +762,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which – if set – will prevent all editing of the record for non-admin users.
+     *
      * @param string $editLock
      */
     public function setEditLock($editLock)
@@ -777,6 +772,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which will contain the UID of the original record in case a record is created as a copy or new version of another record.
+     *
      * @return string
      */
     public function getOrigUid()
@@ -785,6 +782,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which will contain the UID of the original record in case a record is created as a copy or new version of another record.
+     *
      * @param string $origUid
      */
     public function setOrigUid($origUid)
@@ -793,6 +792,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which indicates if a record is considered deleted or not.
+     *
      * @return string
      */
     public function getDelete()
@@ -801,6 +802,8 @@ class Ctrl
     }
 
     /**
+     * Field name, which indicates if a record is considered deleted or not.
+     *
      * @param string $delete
      */
     public function setDelete($delete)
@@ -809,6 +812,8 @@ class Ctrl
     }
 
     /**
+     * Field name where description of a record is stored in.
+     *
      * @return string
      */
     public function getDescriptionColumn()
@@ -817,6 +822,8 @@ class Ctrl
     }
 
     /**
+     * Field name where description of a record is stored in.
+     *
      * @param string $descriptionColumn
      */
     public function setDescriptionColumn($descriptionColumn)
@@ -825,6 +832,8 @@ class Ctrl
     }
 
     /**
+     * Specifies which publishing control features are automatically implemented for the table.
+     *
      * @return array
      */
     public function getEnableColumns()
@@ -833,6 +842,8 @@ class Ctrl
     }
 
     /**
+     * Specifies which publishing control features are automatically implemented for the table.
+     *
      * @param array $enableColumns
      */
     public function setEnableColumns($enableColumns)
@@ -841,14 +852,18 @@ class Ctrl
     }
 
     /**
+     * Comma-separated list of fields from the table that will be included when searching for records in the TYPO3 backend. Starting with TYPO3 CMS 4.6, no record from a table will ever be found if that table does not have “searchFields” defined.
+     *
      * @return array
      */
     public function getSearchFields()
     {
-        return $this->searchFields;
+        return implode(',', $this->searchFields);
     }
 
     /**
+     * Comma-separated list of fields from the table that will be included when searching for records in the TYPO3 backend. Starting with TYPO3 CMS 4.6, no record from a table will ever be found if that table does not have “searchFields” defined.
+     *
      * @param array $searchFields
      */
     public function setSearchFields($searchFields)
@@ -857,6 +872,8 @@ class Ctrl
     }
 
     /**
+     * This option can be used to group records in the new record wizard.
+     *
      * @return string
      */
     public function getGroupName()
@@ -865,6 +882,8 @@ class Ctrl
     }
 
     /**
+     * This option can be used to group records in the new record wizard.
+     *
      * @param string $groupName
      */
     public function setGroupName($groupName)
@@ -873,6 +892,8 @@ class Ctrl
     }
 
     /**
+     * If set, and the “disabled” field from enablecolumns is specified, then records will be disabled/hidden when they are copied.
+     *
      * @return boolean
      */
     public function isHideAtCopy()
@@ -881,6 +902,8 @@ class Ctrl
     }
 
     /**
+     * If set, and the “disabled” field from enablecolumns is specified, then records will be disabled/hidden when they are copied.
+     *
      * @param boolean $hideAtCopy
      */
     public function setHideAtCopy($hideAtCopy)
@@ -889,6 +912,8 @@ class Ctrl
     }
 
     /**
+     * This string will be prepended the records title field when the record is inserted on the same PID as the original record (thus you can distinguish them).
+     *
      * @return string
      */
     public function getPrependAtCopy()
@@ -897,6 +922,8 @@ class Ctrl
     }
 
     /**
+     * This string will be prepended the records title field when the record is inserted on the same PID as the original record (thus you can distinguish them).
+     *
      * @param string $prependAtCopy
      */
     public function setPrependAtCopy($prependAtCopy)
@@ -905,6 +932,8 @@ class Ctrl
     }
 
     /**
+     * The fields in this list will automatically have the value of the same field from the “previous” record transferred when they are copied or moved to the position after another record from same table.
+     *
      * @return string
      */
     public function getCopyAfterDuplFields()
@@ -913,6 +942,8 @@ class Ctrl
     }
 
     /**
+     * The fields in this list will automatically have the value of the same field from the “previous” record transferred when they are copied or moved to the position after another record from same table.
+     *
      * @param string $copyAfterDuplFields
      */
     public function setCopyAfterDuplFields($copyAfterDuplFields)
@@ -921,6 +952,8 @@ class Ctrl
     }
 
     /**
+     * These fields are restored to the default value of the record when they are copied.
+     *
      * @return string
      */
     public function getSetToDefaultOnCopy()
@@ -929,6 +962,8 @@ class Ctrl
     }
 
     /**
+     * These fields are restored to the default value of the record when they are copied.
+     *
      * @param string $setToDefaultOnCopy
      */
     public function setSetToDefaultOnCopy($setToDefaultOnCopy)
@@ -937,6 +972,8 @@ class Ctrl
     }
 
     /**
+     * When a new record is created, this defines the fields from the ‘previous’ record that should be used as default values.
+     *
      * @return string
      */
     public function getUseColumnsForDefaultValues()
@@ -945,6 +982,8 @@ class Ctrl
     }
 
     /**
+     * When a new record is created, this defines the fields from the ‘previous’ record that should be used as default values.
+     *
      * @param string $useColumnsForDefaultValues
      */
     public function setUseColumnsForDefaultValues($useColumnsForDefaultValues)
@@ -953,6 +992,8 @@ class Ctrl
     }
 
     /**
+     * When a new element is created in a draft workspace a placeholder element is created in the Live workspace.
+     *
      * @return string
      */
     public function getShadowColumnsForNewPlaceholders()
@@ -961,6 +1002,8 @@ class Ctrl
     }
 
     /**
+     * When a new element is created in a draft workspace a placeholder element is created in the Live workspace.
+     *
      * @param string $shadowColumnsForNewPlaceholders
      */
     public function setShadowColumnsForNewPlaceholders($shadowColumnsForNewPlaceholders)
@@ -969,6 +1012,8 @@ class Ctrl
     }
 
     /**
+     * Similar to shadowColumnsForNewPlaceholders but for move placeholders.
+     *
      * @return string
      */
     public function getShadowColumnsForMovePlaceholders()
@@ -977,6 +1022,8 @@ class Ctrl
     }
 
     /**
+     * Similar to shadowColumnsForNewPlaceholders but for move placeholders.
+     *
      * @param string $shadowColumnsForMovePlaceholders
      */
     public function setShadowColumnsForMovePlaceholders($shadowColumnsForMovePlaceholders)
@@ -985,6 +1032,8 @@ class Ctrl
     }
 
     /**
+     * This marks a table to be “static”.
+     *
      * @return boolean
      */
     public function isIsStatic()
@@ -993,6 +1042,8 @@ class Ctrl
     }
 
     /**
+     * This marks a table to be “static”.
+     *
      * @param boolean $isStatic
      */
     public function setIsStatic($isStatic)
@@ -1001,6 +1052,8 @@ class Ctrl
     }
 
     /**
+     * Field name which is used to store the uid of a frontend user if the record is created through fe_adminLib.
+     *
      * @return string
      */
     public function getFeCrUserId()
@@ -1009,6 +1062,8 @@ class Ctrl
     }
 
     /**
+     * Field name which is used to store the uid of a frontend user if the record is created through fe_adminLib.
+     *
      * @param string $feCrUserId
      */
     public function setFeCrUserId($feCrUserId)
@@ -1017,6 +1072,8 @@ class Ctrl
     }
 
     /**
+     * Field name which is used for storing the uid of a frontend group whose members are allowed to edit through fe_adminLib.
+     *
      * @return string
      */
     public function getFeCrGroupId()
@@ -1025,6 +1082,8 @@ class Ctrl
     }
 
     /**
+     * Field name which is used for storing the uid of a frontend group whose members are allowed to edit through fe_adminLib.
+     *
      * @param string $feCrGroupId
      */
     public function setFeCrGroupId($feCrGroupId)
@@ -1033,6 +1092,8 @@ class Ctrl
     }
 
     /**
+     * Field name which points to the field name which - as a boolean - will prevent any editing by the fe_adminLib if set.
+     *
      * @return string
      */
     public function getFeAdminLock()
@@ -1041,6 +1102,8 @@ class Ctrl
     }
 
     /**
+     * Field name which points to the field name which - as a boolean - will prevent any editing by the fe_adminLib if set.
+     *
      * @param string $feAdminLock
      */
     public function setFeAdminLock($feAdminLock)
@@ -1049,6 +1112,8 @@ class Ctrl
     }
 
     /**
+     * Localization access control.
+     *
      * @return string
      */
     public function getLanguageField()
@@ -1057,6 +1122,8 @@ class Ctrl
     }
 
     /**
+     * Localization access control.
+     *
      * @param string $languageField
      */
     public function setLanguageField($languageField)
@@ -1065,6 +1132,8 @@ class Ctrl
     }
 
     /**
+     * Name of the field used by translations to point back to the original record (i.e. the record in the default language of which they are a translation).
+     *
      * @return string
      */
     public function getTransOrigPointerField()
@@ -1073,6 +1142,8 @@ class Ctrl
     }
 
     /**
+     * Name of the field used by translations to point back to the original record (i.e. the record in the default language of which they are a translation).
+     *
      * @param string $transOrigPointerField
      */
     public function setTransOrigPointerField($transOrigPointerField)
@@ -1081,6 +1152,8 @@ class Ctrl
     }
 
     /**
+     * Translations may be stored in a separate table, instead of the same one.
+     *
      * @return string
      */
     public function getTransForeignTable()
@@ -1089,6 +1162,8 @@ class Ctrl
     }
 
     /**
+     * Translations may be stored in a separate table, instead of the same one.
+     *
      * @param string $transForeignTable
      */
     public function setTransForeignTable($transForeignTable)
@@ -1097,6 +1172,8 @@ class Ctrl
     }
 
     /**
+     * Symmetrical property to “transForeignTable”. See above for explanations.
+     *
      * @return string
      */
     public function getTransOrigPointerTable()
@@ -1105,6 +1182,8 @@ class Ctrl
     }
 
     /**
+     * Symmetrical property to “transForeignTable”. See above for explanations.
+     *
      * @param string $transOrigPointerTable
      */
     public function setTransOrigPointerTable($transOrigPointerTable)
@@ -1113,6 +1192,8 @@ class Ctrl
     }
 
     /**
+     * Field name which will be updated with the value of the original language record whenever the translation record is updated.
+     *
      * @return string
      */
     public function getTransOrigDiffSourceField()
@@ -1121,6 +1202,8 @@ class Ctrl
     }
 
     /**
+     * Field name which will be updated with the value of the original language record whenever the translation record is updated.
+     *
      * @param string $transOrigDiffSourceField
      */
     public function setTransOrigDiffSourceField($transOrigDiffSourceField)
@@ -1129,6 +1212,8 @@ class Ctrl
     }
 
     /**
+     * If set, versioning is enabled for this table. If integer it indicates a version number of versioning features.
+     *
      * @return int
      */
     public function getVersioningWS()
@@ -1137,6 +1222,8 @@ class Ctrl
     }
 
     /**
+     * If set, versioning is enabled for this table. If integer it indicates a version number of versioning features.
+     *
      * @param int $versioningWS
      */
     public function setVersioningWS($versioningWS)
@@ -1145,6 +1232,8 @@ class Ctrl
     }
 
     /**
+     * If set, this table can always be edited live even in a workspace and even if “live editing” is not enabled in a custom workspace.
+     *
      * @return boolean
      */
     public function isVersioningWSAlwaysAllowLiveEdit()
@@ -1153,6 +1242,8 @@ class Ctrl
     }
 
     /**
+     * If set, this table can always be edited live even in a workspace and even if “live editing” is not enabled in a custom workspace.
+     *
      * @param boolean $versioningWSAlwaysAllowLiveEdit
      */
     public function setVersioningWSAlwaysAllowLiveEdit($versioningWSAlwaysAllowLiveEdit)
@@ -1161,6 +1252,9 @@ class Ctrl
     }
 
     /**
+     * (Only for other tables than “pages”)
+     * If set, content from this table will get copied along when a new version of a page is created.
+     *
      * @return boolean
      */
     public function isVersioningFollowPages()
@@ -1169,6 +1263,9 @@ class Ctrl
     }
 
     /**
+     * (Only for other tables than “pages”)
+     * If set, content from this table will get copied along when a new version of a page is created.
+     *
      * @param boolean $versioningFollowPages
      */
     public function setVersioningFollowPages($versioningFollowPages)
@@ -1177,6 +1274,8 @@ class Ctrl
     }
 
     /**
+     * Array of sub-properties, see Security-related configuration.
+     *
      * @return array
      */
     public function getSecurity()
@@ -1189,6 +1288,8 @@ class Ctrl
     }
 
     /**
+     * Array of sub-properties, see Security-related configuration.
+     *
      * @param array $security
      */
     public function setSecurity($security)
@@ -1197,6 +1298,8 @@ class Ctrl
     }
 
     /**
+     * Allows users to access records that are not in their defined web-mount, thus bypassing this restriction.
+     *
      * @return boolean
      */
     public function isSecurityIgnoreWebMountRestriction()
@@ -1205,6 +1308,8 @@ class Ctrl
     }
 
     /**
+     * Allows users to access records that are not in their defined web-mount, thus bypassing this restriction.
+     *
      * @param boolean $security_ignoreWebMountRestriction
      */
     public function setSecurityIgnoreWebMountRestriction($security_ignoreWebMountRestriction)
@@ -1213,6 +1318,8 @@ class Ctrl
     }
 
     /**
+     * Allows non-admin users to access records that on the root-level (page-id 0), thus bypassing this usual restriction.
+     *
      * @return boolean
      */
     public function isSecurityIgnoreRootLevelRestriction()
@@ -1221,6 +1328,8 @@ class Ctrl
     }
 
     /**
+     * Allows non-admin users to access records that on the root-level (page-id 0), thus bypassing this usual restriction.
+     *
      * @param boolean $security_ignoreRootLevelRestriction
      */
     public function setSecurityIgnoreRootLevelRestriction($security_ignoreRootLevelRestriction)
@@ -1229,6 +1338,8 @@ class Ctrl
     }
 
     /**
+     * User-defined content for extensions. You can use this as you like.
+     *
      * @return array
      */
     public function getExt()
@@ -1237,6 +1348,8 @@ class Ctrl
     }
 
     /**
+     * User-defined content for extensions. You can use this as you like.
+     *
      * @param array $ext
      */
     public function setExt($ext)
