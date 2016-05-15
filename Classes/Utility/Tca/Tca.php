@@ -1,5 +1,6 @@
 <?php
 namespace BERGWERK\BwrkUtility\Utility\Tca;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * Class Tca
@@ -19,15 +20,15 @@ class Tca extends AbstractTca
 
 
         $ll = $this->conf->getLl();
-        $iconFile = $this->conf->getIconFile();
-        $enableColumns = $this->conf->getEnableColumns();
+        $iconFile = $this->conf->ctrl->getIconFile();
+        $enableColumns = $this->conf->ctrl->getEnableColumns();
 
         if (empty($ll)) {
             $this->conf->setLl('LLL:EXT:' . $this->conf->getExt() . '/Resources/Private/Language/locallang_db.xlf:' . $this->conf->getModel());
         }
 
         if (empty($iconFile)) {
-            $this->iconFile = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($this->conf->getExt()) . 'Resources/Public/Icons/' . $this->conf->getModel() . '.gif';
+            $this->iconFile = ExtensionManagementUtility::extRelPath($this->conf->getExt()) . 'Resources/Public/Icons/' . $this->conf->getModel() . '.gif';
         }
 
         if (count($enableColumns) == 0) {
