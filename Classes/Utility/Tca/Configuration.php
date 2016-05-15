@@ -17,7 +17,6 @@ class Configuration
         $this->ctrl = new Ctrl();
     }
 
-
     /**
      * @var string
      */
@@ -34,87 +33,6 @@ class Configuration
      * @var string
      */
     protected $plugin = '';
-    /**
-     * @var string
-     */
-    protected $labelField = '';
-    /**
-     * @var string
-     */
-    protected $iconFile = '';
-
-    /**
-     * @var array
-     */
-    protected $searchFields = array();
-
-    /**
-     * @var array
-     */
-    protected $enableColumns = array();
-
-    /**
-     * @var bool
-     */
-    protected $hideTable = false;
-
-    /**
-     * @var string
-     */
-    protected $labelUserFunc = '';
-
-    /**
-     * @var array
-     */
-    protected $requestUpdateColumns = array();
-
-    /**
-     * @param string $ext
-     */
-    public function setExt($ext)
-    {
-        $this->ext = $ext;
-    }
-
-    /**
-     * @param string $ll
-     */
-    public function setLl($ll)
-    {
-        $this->ll = $ll;
-    }
-
-    /**
-     * @param string $model
-     */
-    public function setModel($model)
-    {
-        $this->model = $model;
-    }
-
-    /**
-     * @param string $labelField
-     */
-    public function setLabelField($labelField)
-    {
-        $this->labelField = $labelField;
-    }
-
-    /**
-     * @param string $iconFile
-     */
-    public function setIconFile($iconFile)
-    {
-        $this->iconFile = $iconFile;
-    }
-
-    /**
-     * @param array $enableColumns
-     */
-    public function setEnableColumns($enableColumns)
-    {
-        $this->enableColumns = $enableColumns;
-    }
 
     /**
      * @return string
@@ -122,6 +40,14 @@ class Configuration
     public function getExt()
     {
         return $this->ext;
+    }
+
+    /**
+     * @param string $ext
+     */
+    public function setExt($ext)
+    {
+        $this->ext = $ext;
     }
 
     /**
@@ -133,6 +59,14 @@ class Configuration
     }
 
     /**
+     * @param string $ll
+     */
+    public function setLl($ll)
+    {
+        $this->ll = $ll;
+    }
+
+    /**
      * @return string
      */
     public function getModel()
@@ -141,43 +75,11 @@ class Configuration
     }
 
     /**
-     * @return string
+     * @param string $model
      */
-    public function getLabelField()
+    public function setModel($model)
     {
-        return $this->labelField;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIconFile()
-    {
-        return $this->iconFile;
-    }
-
-    /**
-     * @return array
-     */
-    public function getSearchFields()
-    {
-        return $this->searchFields;
-    }
-
-    /**
-     * @return array
-     */
-    public function getEnableColumns()
-    {
-        return $this->enableColumns;
-    }
-
-    /**
-     * @param array $searchFields
-     */
-    public function setSearchFields($searchFields)
-    {
-        $this->searchFields = $searchFields;
+        $this->model = $model;
     }
 
     /**
@@ -195,54 +97,4 @@ class Configuration
     {
         $this->plugin = $plugin;
     }
-
-    /**
-     * @return boolean
-     */
-    public function isHideTable()
-    {
-        return $this->hideTable;
-    }
-
-    /**
-     * @param boolean $hideTable
-     */
-    public function setHideTable($hideTable)
-    {
-        $this->hideTable = $hideTable;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLabelUserFunc()
-    {
-        return $this->labelUserFunc;
-    }
-
-    /**
-     * @param string $labelUserFunc
-     */
-    public function setLabelUserFunc($labelUserFunc)
-    {
-        $this->labelUserFunc = $labelUserFunc;
-    }
-
-    /**
-     * @param $column
-     */
-    public function addRequestUpdateColumn($column)
-    {
-        $this->requestUpdateColumns[] = $column;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRequestUpdateColumns()
-    {
-        return $this->requestUpdateColumns;
-    }
-
-
 }

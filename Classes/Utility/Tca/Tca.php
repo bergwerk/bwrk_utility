@@ -52,8 +52,6 @@ class Tca extends AbstractTca
                 'label' => $this->conf->ctrl->getLabel(),
                 'label_alt' => $this->conf->ctrl->getLabelAlt(),
                 'label_alt_force' => $this->conf->ctrl->isLabelAltForce(),
-                'label_userFunc' => $this->conf->ctrl->getLabelUserFunc(),
-                'label_userFunc_options' => $this->conf->ctrl->getLabelUserFuncOptions(),
                 'formattedLabel_userFunc' => $this->conf->ctrl->getFormattedLabelUserFunc(),
                 'formattedLabel_userFunc_options' => $this->conf->ctrl->getFormattedLabelUserFuncOptions(),
                 'type' => $this->conf->ctrl->getType(),
@@ -116,11 +114,11 @@ class Tca extends AbstractTca
             ),
         );
 
-        $labelUserFunc = $this->conf->getLabelUserFunc();
-
+        $labelUserFunc = $this->conf->ctrl->getLabelUserFunc();
         if (!empty($labelUserFunc))
         {
             $tca['ctrl']['label_userFunc'] = $labelUserFunc;
+            $tca['ctrl']['label_userFunc_options'] = $this->conf->ctrl->getLabelUserFuncOptions();
         }
 
         return $tca;
