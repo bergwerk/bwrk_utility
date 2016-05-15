@@ -13,6 +13,9 @@ class Example extends Tca
         $configuration->setExt('bwrk_utility');
         $configuration->setPlugin('example');
 
+        $configuration->ctrl->setTitle('title');
+        $configuration->ctrl->setLabel('title');
+
         $this->init($configuration);
     }
 
