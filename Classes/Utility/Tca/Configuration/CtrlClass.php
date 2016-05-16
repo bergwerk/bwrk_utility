@@ -45,11 +45,9 @@ class CtrlClass
      */
     protected $hideTable = false;
     /**
-     * @var string
-     *
-     * @todo: implode(',', $this->conf->getRequestUpdateColumns())
+     * @var array
      */
-    protected $requestUpdate = '';
+    protected $requestUpdate = array();
     /**
      * @var string
      */
@@ -69,11 +67,11 @@ class CtrlClass
     /**
      * @var string
      */
-    protected $selIconField = 'icon';
+    protected $selIconField = '';
     /**
      * @var string
      */
-    protected $selIconFieldPath = 'uploads/media';
+    protected $selIconFieldPath = '';
     /**
      * @var string
      */
@@ -438,7 +436,7 @@ class CtrlClass
      */
     public function getRequestUpdate()
     {
-        return $this->requestUpdate;
+        return implode(',', $this->requestUpdate);
     }
 
     /**
@@ -448,7 +446,7 @@ class CtrlClass
      */
     public function setRequestUpdate($requestUpdate)
     {
-        $this->requestUpdate = $requestUpdate;
+        $this->requestUpdate[] = $requestUpdate;
     }
 
     /**

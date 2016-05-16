@@ -1,6 +1,7 @@
 <?php
 namespace BERGWERK\BwrkUtility\Utility\Tca;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class Tca
@@ -65,8 +66,6 @@ class Tca extends AbstractTca
                 'hideTable' => $this->conf->ctrl->isHideTable(),
                 'requestUpdate' => $this->conf->ctrl->getRequestUpdate(),
                 'iconfile' => $this->conf->ctrl->getIconFile(),
-                'typeicon_column' => $this->conf->ctrl->getTypeIconColumn(),
-                'typeicon_classes' => $this->conf->ctrl->getTypeIconClasses(),
                 'thumbnail' => $this->conf->ctrl->getThumbnail(),
                 'selicon_field' => $this->conf->ctrl->getSelIconField(),
                 'selicon_field_path' => $this->conf->ctrl->getSelIconFieldPath(),
@@ -123,13 +122,19 @@ class Tca extends AbstractTca
             ),
         );
 
+        $typeIconColumn = $this->conf->ctrl->getTypeIconColumn();
+        if(!empty($typeIconColumn)) $tca['ctrl']['typeicon_column'] = $typeIconColumn;
+
+        $typeIconClasses = $this->conf->ctrl->getTypeIconClasses();
+        if(!empty($typeIconClasses)) $tca['ctrl']['typeicon_classes'] = $typeIconClasses;
+
         $labelUserFunc = $this->conf->ctrl->getLabelUserFunc();
         if (!empty($labelUserFunc))
         {
             $tca['ctrl']['label_userFunc'] = $labelUserFunc;
             $tca['ctrl']['label_userFunc_options'] = $this->conf->ctrl->getLabelUserFuncOptions();
         }
-
+        DebuggerUtility::var_dump($tca);
         return $tca;
     }
 }
