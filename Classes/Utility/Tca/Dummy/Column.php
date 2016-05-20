@@ -1726,6 +1726,23 @@ class Column {
         $this->type = $type;
     }
 
+    protected $expandAll;
+
+    /**
+     * @return mixed
+     */
+    public function getExpandAll()
+    {
+        return $this->expandAll;
+    }
+
+    /**
+     * @param mixed $expandAll
+     */
+    public function setExpandAll($expandAll)
+    {
+        $this->expandAll = $expandAll;
+    }
 
 
 }

@@ -86,7 +86,7 @@ class FormatHelper {
                 break;
             case 'select':
                 $fields = array(
-                    'type'
+                    'type',
                 );
                 break;
             case 'group':
@@ -116,7 +116,8 @@ class FormatHelper {
                 break;
             case 'inline':
                 $fields = array(
-                    'type'
+                    'type',
+                    'expandAll'
                 );
                 break;
         }
