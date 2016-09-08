@@ -131,10 +131,11 @@ class Tca extends AbstractTca
         $labelUserFunc = $this->conf->ctrl->getLabelUserFunc();
         if (!empty($labelUserFunc))
         {
+            $tca['ctrl']['formattedLabel_userFunc'] = $labelUserFunc;
             $tca['ctrl']['label_userFunc'] = $labelUserFunc;
             $tca['ctrl']['label_userFunc_options'] = $this->conf->ctrl->getLabelUserFuncOptions();
         }
-        DebuggerUtility::var_dump($tca);
+
         return $tca;
     }
 }
