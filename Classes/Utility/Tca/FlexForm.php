@@ -141,7 +141,6 @@ abstract class FlexForm extends AbstractTca
                 $fieldsArrayCounter++;
             }
         }
-
         return $fieldsArray;
     }
 
@@ -154,6 +153,13 @@ abstract class FlexForm extends AbstractTca
         $valuesArray = array();
 
         foreach ($values as $key => $value) {
+            if($key == 'items') {
+                $valuesArray[] = array(
+                    'name' => $key,
+                    'value' => $value
+                );
+                continue;
+            }
             if (is_array($value)) {
                 $valuesArray[] = array(
                     'name' => $key,
@@ -166,7 +172,6 @@ abstract class FlexForm extends AbstractTca
                 );
             }
         }
-
         return $valuesArray;
     }
 
@@ -176,23 +181,36 @@ abstract class FlexForm extends AbstractTca
      */
     private function generateXmlElement($xmlElement, $data)
     {
-        foreach ($data as $element)
-        {
+        foreach ($data as $element) {
             $elementName = $element['name'];
             $elementValue = $element['value'];
 
-            if (empty($elementName) || empty($elementValue))
-            {
+
+            if (empty($elementName) || empty($elementValue)) {
                 continue;
             }
 
-            if (!is_array($elementValue))
-            {
+            if (!is_array($elementValue)) {
                 $xmlElement->addChild($elementName, $elementValue);
-            }
-            else
-            {
-                $xmlChild = $xmlElement->addChild($elementName);
+            } else {
+                if($elementName == 'items')
+                {
+                    $items = $xmlElement->addChild('items');
+                    foreach($elementValue as $key => $value)
+                    {
+                        $numIndex = $items->addChild('numIndex');
+                        $numIndex->addAttribute('index', $key);
+                        $numIndex->addAttribute('type', 'array');
+
+                        $numIndex0 = $numIndex->addChild('numIndex', $value[0]);
+                        $numIndex0->addAttribute('index', 0);
+                        $numIndex1 = $numIndex->addChild('numIndex', $value[1]);
+                        $numIndex1->addAttribute('index', 1);
+
+                    }
+                } else {
+                    $xmlChild = $xmlElement->addChild($elementName);
+                }
 
                 $this->generateXmlElement($xmlChild, $elementValue);
             }

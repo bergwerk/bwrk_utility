@@ -203,6 +203,10 @@ class AbstractTca
         if (!empty($default)) {
             $this->fields[$column->getFieldName()]['config']['default'] = $default;
         }
+        $onChange = $column->getOnChange();
+        if (!empty($onChange)) {
+            $this->fields[$column->getFieldName()]['config']['onChange'] = $onChange;
+        }
 
         return array($column->getFieldName() => $this->fields[$column->getFieldName()]);
     }
@@ -220,7 +224,8 @@ class AbstractTca
 
         $additionalFields = array(
             'displayCond',
-            'defaultExtras'
+            'defaultExtras',
+            'onChange'
         );
         foreach($additionalFields as $additionalField)
         {
@@ -274,6 +279,7 @@ class AbstractTca
         if ($column->isRte()) {
             $this->fields[$column->getFieldName()]['defaultExtras'] = 'richtext[]:rte_transform[mode=ts_css]';
         }
+        $column->setMax(0);
         return $this->returnFieldArray($column, 'text');
     }
 
@@ -326,6 +332,7 @@ class AbstractTca
                 $item['value']
             );
         }
+
         $column->setItems($itemsArr);
         return $this->returnFieldArray($column, 'select');
     }

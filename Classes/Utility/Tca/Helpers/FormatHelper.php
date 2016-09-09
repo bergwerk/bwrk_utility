@@ -146,7 +146,8 @@ class FormatHelper {
                     'mode',
                     'wizards',
                     'dbType',
-                    'eval'
+                    'eval',
+                    'onChange',
                 );
                 break;
             case 'text':
@@ -206,7 +207,7 @@ class FormatHelper {
                     'authMode',
                     'authMode_enforce',
                     'exclusiveKeys',
-                    'localizeReferencesAtParentLocalization'
+                    'localizeReferencesAtParentLocalization',
                 );
                 break;
             case 'inline':

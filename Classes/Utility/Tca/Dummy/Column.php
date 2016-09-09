@@ -356,6 +356,11 @@ class Column {
      */
     protected $type = '';
 
+    /**
+     * @var string
+     */
+    protected $onChange = '';
+
 
     /**
      * Column constructor.
@@ -1744,5 +1749,19 @@ class Column {
         $this->expandAll = $expandAll;
     }
 
+    /**
+     * @return string
+     */
+    public function getOnChange()
+    {
+        return $this->onChange;
+    }
 
+    /**
+     * @param string $onChange
+     */
+    public function setOnChange($onChange = 'reload')
+    {
+        $this->onChange = $onChange;
+    }
 }
