@@ -4,6 +4,7 @@ namespace BERGWERK\BwrkUtility\Utility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Frontend\Page\PageRepository;
 
 /** *************************************************************
@@ -106,6 +107,11 @@ class CacheUtility
      */
     public function getCache()
     {
+        if(GeneralUtility::getApplicationContext()->isDevelopment() || GeneralUtility::getApplicationContext()->__toString() == 'Production/Staging')
+        {
+            return false;
+        }
+
         $cacheID = $this->getCacheID(array($this->cacheIdentifier));
         $data = PageRepository::getHash($cacheID);
         return !$data ? false : unserialize($data);
