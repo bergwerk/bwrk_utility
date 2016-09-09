@@ -30,7 +30,7 @@ use TYPO3\CMS\Frontend\Page\PageRepository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-class CacheUtility extends ActionController
+class CacheUtility
 {
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
@@ -72,6 +72,11 @@ class CacheUtility extends ActionController
      */
     protected $gpVars;
 
+    /**
+     * @var string
+     */
+    protected $cacheIdentifier = null;
+
 
     /**
      * CacheUtility constructor.
@@ -79,8 +84,6 @@ class CacheUtility extends ActionController
      */
     public function __construct($extKey)
     {
-        parent::__construct();
-
         $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $this->request = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Mvc\\Request');
 
@@ -99,12 +102,11 @@ class CacheUtility extends ActionController
     /**
      * getCache function.
      *
-     * @param mixed $hashVars (default: null)
      * @return mixed
      */
-    public function getCache($hashVars = null)
+    public function getCache()
     {
-        $cacheID = $this->getCacheID(array($hashVars));
+        $cacheID = $this->getCacheID(array($this->cacheIdentifier));
         $data = PageRepository::getHash($cacheID);
         return !$data ? false : unserialize($data);
     }
@@ -114,17 +116,26 @@ class CacheUtility extends ActionController
      * setCache function.
      *
      * @param mixed $data (default: null)
-     * @param mixed $hashVars (default: null)
      * @return mixed
      */
-    public function setCache($data = null, $hashVars = null)
+    public function setCache($data = null)
     {
         $lifetime = mktime(23, 59, 59) + 1 - time();
-        $cacheID = $this->getCacheID(array($hashVars));
+        $cacheID = $this->getCacheID(array($this->cacheIdentifier));
 
         PageRepository::storeHash($cacheID, serialize($data), $this->extKey . '_cache', $lifetime);
         return $data;
     }
+
+    /**
+     * @param array $array
+     */
+    public function setCacheIdentifier($array)
+    {
+        $this->cacheIdentifier = md5(json_encode($array));
+    }
+
+
 
 
     /**
