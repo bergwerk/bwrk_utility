@@ -29,20 +29,20 @@
 
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'BERGWERK Utility',
-    'description' => 'BERGWERK utilities for flexform and tca generation',
+    'description' => 'BERGWERK utilities caching, tca and flexform generation',
     'category' => 'be',
-    'author' => 'Georg Dümmler, Daniel Maier',
-    'author_email' => 'gd@bergwerk.ag, dm@bergwerk.ag',
-    'author_company' => 'BERGWERK Werbeagentur GmbH',
+    'author' => 'Georg Dümmler',
+    'author_email' => 'gd@bergwerk.ag',
+    'author_company' => 'www.bergwerk.ag',
     'state' => 'beta',
     'internal' => '',
     'uploadfolder' => '0',
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
-    'version' => '1.3.3',
+    'version' => '3.0.0',
     'constraints' => array(
         'depends' => array(
-            'typo3' => '6.2.0-7.99.99',
+            'typo3' => '6.2.0-8.7.99',
         ),
         'conflicts' => array(),
         'suggests' => array()
