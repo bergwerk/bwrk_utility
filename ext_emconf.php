@@ -39,7 +39,11 @@ $EM_CONF[$_EXTKEY] = array(
     'uploadfolder' => '0',
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
+<<<<<<< HEAD
     'version' => '3.0.0',
+=======
+    'version' => '1.1.1',
+>>>>>>> tags/v1.1.3
     'constraints' => array(
         'depends' => array(
             'typo3' => '6.2.0-8.7.99',
