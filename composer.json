@@ -1,0 +1,35 @@
+{
+  "name": "bergwerk/bwrk_utility",
+  "description": "BERGWERK Utility for TCA and Extbase",
+  "homepage": "www.bergwerk.ag",
+  "authors": [
+    {
+      "name": "Georg Dümmler",
+      "email": "typo3@bergwerk.ag"
+    }
+  ],
+  "type": "typo3-cms-extension",
+  "version": "1.1.0",
+  "license": ["GPL-2.0+"],
+  "require": {
+    "typo3/cms-core": ">7.6"
+  },
+  "replace": {
+    "bwrk_template": "self.version",
+    "typo3-ter/bwrk_utility": "self.version"
+  },
+  "autoload": {
+    "psr-4": {
+      "BERGWERK\\BwrkUtility\\": "Classes"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.x-dev"
+    },
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": ".Build/Web"
+    }
+  }
+}
